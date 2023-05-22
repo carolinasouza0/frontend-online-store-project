@@ -1,11 +1,15 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from './Categories';
+import Search from './Search';
+import ProductCard from './ProductCard';
 
 class Home extends Component {
   state = {
     categories: [],
+    productsList: [],
+    searchProduct: '',
   };
 
   async componentDidMount() {
@@ -13,8 +17,28 @@ class Home extends Component {
     this.setState({ categories: categorysApi });
   }
 
+  handleInput = ({ target }) => {
+    const { value } = target;
+    this.setState({ searchProduct: value });
+  };
+
+  handleApiQuery = async () => {
+    const { searchProduct } = this.state;
+    const queryApi = await getProductsFromCategoryAndQuery('', searchProduct);
+    if (!queryApi.results.length) {
+      this.setState({
+        emptyList: true,
+      });
+    } else {
+      this.setState({
+        productsList: queryApi.results,
+        emptyList: false,
+      });
+    }
+  };
+
   render() {
-    const { categories } = this.state;
+    const { categories, productsList, emptyList } = this.state;
     return (
       <div>
         <Categories categories={ categories } />
@@ -35,6 +59,13 @@ class Home extends Component {
               carrinho
             </Link>
           </button>
+          <Search
+            handleApiQuery={ this.handleApiQuery || this.handleApiId }
+            handleInput={ this.handleInput }
+          />
+          {emptyList
+            ? <p>Nenhum produto foi encontrado</p>
+            : <ProductCard productsList={ productsList } />}
         </div>
       </div>
 
