@@ -3,24 +3,22 @@ import PropTypes from 'prop-types';
 
 class Categories extends Component {
   render() {
-    const { categories } = this.props;
+    const { categories, handleApiId } = this.props;
     return (
       <aside>
         <div>
           <h3>Categorias:</h3>
           {
             categories.map((category) => (
-              <label
+              <button
                 data-testid="category"
                 key={ category.id }
+                value={ category.name }
+                onClick={ () => handleApiId(category.id) }
               >
-
                 {category.name}
 
-                <input
-                  type="radio"
-                />
-              </label>
+              </button>
             ))
           }
 
@@ -31,6 +29,7 @@ class Categories extends Component {
 }
 Categories.propTypes = {
   categories: PropTypes.arrayOf().isRequired,
+  handleApiId: PropTypes.func.isRequired,
 };
 
 export default Categories;

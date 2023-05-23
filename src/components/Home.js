@@ -22,6 +22,13 @@ class Home extends Component {
     this.setState({ searchProduct: value });
   };
 
+  handleApiId = async (id) => {
+    const idApi = await getProductsFromCategoryAndQuery(id, '');
+    this.setState({
+      productsList: idApi.results,
+    });
+  };
+
   handleApiQuery = async () => {
     const { searchProduct } = this.state;
     const queryApi = await getProductsFromCategoryAndQuery('', searchProduct);
@@ -41,7 +48,10 @@ class Home extends Component {
     const { categories, productsList, emptyList } = this.state;
     return (
       <div>
-        <Categories categories={ categories } />
+        <Categories
+          categories={ categories }
+          handleApiId={ this.handleApiId }
+        />
         <div>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
