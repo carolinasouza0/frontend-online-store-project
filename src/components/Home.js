@@ -4,6 +4,7 @@ import { getCategories, getProductsFromCategoryAndQuery } from '../services/api'
 import Categories from './Categories';
 import Search from './Search';
 import ProductCard from './ProductCard';
+import { saveCart } from '../helpers/localStorageCart';
 
 class Home extends Component {
   state = {
@@ -44,6 +45,12 @@ class Home extends Component {
     }
   };
 
+  addToCart = (id) => {
+    const { productsList } = this.state;
+    saveCart(productsList, id);
+    // console.log(teste);
+  };
+
   render() {
     const { categories, productsList, emptyList } = this.state;
     return (
@@ -70,12 +77,12 @@ class Home extends Component {
             </Link>
           </button>
           <Search
-            handleApiQuery={ this.handleApiQuery || this.handleApiId }
+            handleApiQuery={ this.handleApiQuery }
             handleInput={ this.handleInput }
           />
           {emptyList
             ? <p>Nenhum produto foi encontrado</p>
-            : <ProductCard productsList={ productsList } />}
+            : <ProductCard productsList={ productsList } addToCart={ this.addToCart } />}
         </div>
       </div>
 
