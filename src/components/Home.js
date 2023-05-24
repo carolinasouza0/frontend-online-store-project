@@ -65,16 +65,12 @@ class Home extends Component {
         </div>
 
         <div>
-          {/* <button
-            type="button"
-          > */}
           <Link
             to="/shoppingCart"
             data-testid="shopping-cart-button"
           >
             carrinho
           </Link>
-          {/* </button> */}
           <Search
             handleApiQuery={ this.handleApiQuery }
             handleInput={ this.handleInput }
