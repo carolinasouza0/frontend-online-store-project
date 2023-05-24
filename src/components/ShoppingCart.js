@@ -25,18 +25,21 @@ class ShoppingCart extends Component {
 
   render() {
     const { productsCart } = this.state;
+    console.log(productsCart);
     const empty = this.renderEmptyCart();
     if (productsCart.length === 0) return empty;
     return (
       <div>
         {' '}
-        { productsCart.map((prod) => (
-          <div key={ prod.title }>
-            <h3 data-testid="shopping-cart-product-name">{prod.title}</h3>
-            <img src={ prod.thumbnail } alt={ prod.title } />
+        { productsCart.map(({ title, thumbnail, id, price }) => (
+          <div
+            key={ id }
+          >
+            <h3 data-testid="shopping-cart-product-name">{title}</h3>
+            <img src={ thumbnail } alt={ title } />
             <p>
               `R$ $
-              {prod.price}
+              {price}
               `
             </p>
             <p data-testid="shopping-cart-product-quantity">1</p>

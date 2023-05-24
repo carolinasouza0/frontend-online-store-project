@@ -48,7 +48,6 @@ class Home extends Component {
   addToCart = (id) => {
     const { productsList } = this.state;
     saveCart(productsList, id);
-    // console.log(teste);
   };
 
   render() {
@@ -66,16 +65,16 @@ class Home extends Component {
         </div>
 
         <div>
-          <button
+          {/* <button
             type="button"
+          > */}
+          <Link
+            to="/shoppingCart"
+            data-testid="shopping-cart-button"
           >
-            <Link
-              to="/shoppingCart"
-              data-testid="shopping-cart-button"
-            >
-              carrinho
-            </Link>
-          </button>
+            carrinho
+          </Link>
+          {/* </button> */}
           <Search
             handleApiQuery={ this.handleApiQuery }
             handleInput={ this.handleInput }
