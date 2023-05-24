@@ -11,8 +11,18 @@ class ShoppingCart extends Component {
   }
 
   handleProducts = () => {
+    // const { productsCart } = this.state;
     const savedProducts = getSavedCart();
+    // console.log(this.state);
+    // console.log(savedProducts);
     this.setState({ productsCart: savedProducts });
+    // console.log(productsCart);
+    // const newCart = productsCart.map((prod) => {
+    //   prod.quantity = 1;
+    //   return prod;
+    // });
+    // console.log(newCart);
+    // this.setState({ productsCart: newCart });
   };
 
   renderEmptyCart = () => (
@@ -23,15 +33,60 @@ class ShoppingCart extends Component {
     </section>
   );
 
+  increaseQuantity = (id) => {
+    const { productsCart } = this.state;
+    const arrayProductsIncrease = [];
+    const productIncrease = productsCart.find((prod) => id === prod.id);
+    arrayProductsIncrease.push(productIncrease);
+    console.log(arrayProductsIncrease);
+
+    const newCart = arrayProductsIncrease.map((product) => {
+      product.quantity += 1;
+      return product;
+    });
+    this.setState((prevState) => ({
+      ...prevState,
+      newCart,
+    }));
+  };
+
+  decreaseQuantity = (id) => {
+    const { productsCart } = this.state;
+    const arrayProductsIncrease = [];
+    const productIncrease = productsCart.find((prod) => id === prod.id);
+    arrayProductsIncrease.push(productIncrease);
+
+    const newCart = arrayProductsIncrease.map((product) => {
+      product.quantity -= 1;
+      return product;
+    });
+    this.setState((prevState) => ({
+      ...prevState,
+      newCart,
+    }));
+  };
+
+  removeProduct = (id) => {
+    const { productsCart } = this.state;
+    const removeItem = productsCart.find((product) => product.id === id);
+    const index = productsCart.indexOf(removeItem);
+    productsCart.splice(index, 1);
+    this.setState({
+      productsCart,
+    });
+    localStorage.setItem('shoppingCart', JSON.stringify(productsCart));
+  };
+
   render() {
     const { productsCart } = this.state;
-    console.log(productsCart);
+    // console.log(productsCart);
+
     const empty = this.renderEmptyCart();
     if (productsCart.length === 0) return empty;
     return (
       <div>
         {' '}
-        { productsCart.map(({ title, thumbnail, id, price }) => (
+        { productsCart.map(({ title, thumbnail, id, price, quantity }) => (
           <div
             key={ id }
           >
@@ -42,18 +97,25 @@ class ShoppingCart extends Component {
               {price}
               `
             </p>
-            <p data-testid="shopping-cart-product-quantity">1</p>
+            <p
+              data-testid="shopping-cart-product-quantity"
+            >
+              1
+              { quantity === 0 ? 1 : quantity }
+
+            </p>
             <div>
               <button
                 type="button"
                 data-testid="product-increase-quantity"
-                onClick={ () => this.increaseQuantity() }
+                onClick={ () => this.increaseQuantity(id) }
               >
                 +
               </button>
               <button
                 type="button"
                 data-testid="product-decrease-quantity"
+                onClick={ () => this.decreaseQuantity(id) }
               >
                 -
 
@@ -63,6 +125,7 @@ class ShoppingCart extends Component {
               <button
                 type="button"
                 data-testid="remove-product"
+                onClick={ () => this.removeProduct(id) }
               >
                 REMOVER
 

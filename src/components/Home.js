@@ -47,7 +47,11 @@ class Home extends Component {
 
   addToCart = (id) => {
     const { productsList } = this.state;
-    saveCart(productsList, id);
+    const cart = productsList.map((prod) => {
+      prod.quantity = 1;
+      return prod;
+    });
+    saveCart(cart, id);
   };
 
   render() {
