@@ -9,3 +9,16 @@ export const saveCart = (list, id) => {
   localStorage
     .setItem('shoppingCart', JSON.stringify([...cartProducts, newCartProducts]));
 };
+
+export const getSavedComments = (id) => {
+  const evaluation = localStorage.getItem(id);
+  return evaluation ? JSON.parse(evaluation) : [];
+};
+
+export const savedComents = ({ email, text, rating, productId }) => {
+  const savedEvaluation = getSavedComments(productId);
+  const newItem = { email, text, rating };
+  const newItems = [...savedEvaluation, newItem];
+  localStorage
+    .setItem(productId, JSON.stringify(newItems));
+};

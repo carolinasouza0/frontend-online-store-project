@@ -11,25 +11,14 @@ class ShoppingCart extends Component {
   }
 
   handleProducts = () => {
-    // const { productsCart } = this.state;
     const savedProducts = getSavedCart();
-    // console.log(this.state);
-    // console.log(savedProducts);
+
     this.setState({ productsCart: savedProducts });
-    // console.log(productsCart);
-    // const newCart = productsCart.map((prod) => {
-    //   prod.quantity = 1;
-    //   return prod;
-    // });
-    // console.log(newCart);
-    // this.setState({ productsCart: newCart });
   };
 
   renderEmptyCart = () => (
     <section>
-      <p data-testid="shopping-cart-empty-message">
-        Seu carrinho está vazio
-      </p>
+      <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
     </section>
   );
 
@@ -79,17 +68,14 @@ class ShoppingCart extends Component {
 
   render() {
     const { productsCart } = this.state;
-    // console.log(productsCart);
 
     const empty = this.renderEmptyCart();
     if (productsCart.length === 0) return empty;
     return (
       <div>
         {' '}
-        { productsCart.map(({ title, thumbnail, id, price, quantity }) => (
-          <div
-            key={ id }
-          >
+        {productsCart.map(({ title, thumbnail, id, price, quantity }) => (
+          <div key={ id }>
             <h3 data-testid="shopping-cart-product-name">{title}</h3>
             <img src={ thumbnail } alt={ title } />
             <p>
@@ -97,12 +83,9 @@ class ShoppingCart extends Component {
               {price}
               `
             </p>
-            <p
-              data-testid="shopping-cart-product-quantity"
-            >
+            <p data-testid="shopping-cart-product-quantity">
               1
-              { quantity === 0 ? 1 : quantity }
-
+              {quantity === 0 ? 1 : quantity}
             </p>
             <div>
               <button
@@ -118,7 +101,6 @@ class ShoppingCart extends Component {
                 onClick={ () => this.decreaseQuantity(id) }
               >
                 -
-
               </button>
             </div>
             <div>
@@ -128,10 +110,10 @@ class ShoppingCart extends Component {
                 onClick={ () => this.removeProduct(id) }
               >
                 REMOVER
-
               </button>
             </div>
-          </div>)) }
+          </div>
+        ))}
       </div>
     );
   }

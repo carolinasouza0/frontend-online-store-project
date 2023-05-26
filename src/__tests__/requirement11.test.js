@@ -58,7 +58,6 @@ describe(`11 - Avalie e comente acerca de um produto em sua tela de exibição d
     expect(await screen.findByTestId('product-detail-evaluation')).toHaveValue(
       ''
     );
-
     await waitFor(async () => {
       expect(await screen.findByText(evaluationEmail)).toBeVisible();
       expect(await screen.findByText(evaluationContent)).toBeVisible();
