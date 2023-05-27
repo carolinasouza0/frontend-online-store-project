@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getSavedCart } from '../helpers/localStorageCart';
 
 class ShoppingCart extends Component {
@@ -68,7 +69,6 @@ class ShoppingCart extends Component {
 
   render() {
     const { productsCart } = this.state;
-
     const empty = this.renderEmptyCart();
     if (productsCart.length === 0) return empty;
     return (
@@ -79,13 +79,12 @@ class ShoppingCart extends Component {
             <h3 data-testid="shopping-cart-product-name">{title}</h3>
             <img src={ thumbnail } alt={ title } />
             <p>
-              `R$ $
+              R$
               {price}
-              `
             </p>
             <p data-testid="shopping-cart-product-quantity">
               1
-              {quantity === 0 ? 1 : quantity}
+              {quantity}
             </p>
             <div>
               <button
@@ -114,6 +113,7 @@ class ShoppingCart extends Component {
             </div>
           </div>
         ))}
+        <Link to="/checkout" data-testid="checkout-products"> Finalizar compra </Link>
       </div>
     );
   }
