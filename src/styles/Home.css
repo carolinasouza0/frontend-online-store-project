@@ -1,0 +1,15 @@
+.homepage-container {
+  border: 2px blue solid;
+  height: 100vh;
+  margin-left: 20rem;
+}
+
+.type-search {
+  border: 2px orange solid;
+  height: fit-content;
+  margin-top: 1rem;
+}
+
+header {
+  border: 2px solid black;
+}

@@ -6,6 +6,7 @@ import Categories from './Categories';
 import Search from './Search';
 import ProductCard from './ProductCard';
 import { getCartSize, getSavedCart, saveCart } from '../helpers/localStorageCart';
+import '../styles/Home.css';
 
 class Home extends Component {
   state = {
@@ -65,17 +66,23 @@ class Home extends Component {
     const { categories, productsList, emptyList, cartSize } = this.state;
     return (
       <div>
-        <Categories
-          categories={ categories }
-          handleApiId={ this.handleApiId }
-        />
-        <div>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-        </div>
+        <aside>
+          <Categories
+            categories={ categories }
+            handleApiId={ this.handleApiId }
+          />
+        </aside>
+        <header>
+          <div className="type-search flex">
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+            <Search
+              handleApiQuery={ this.handleApiQuery }
+              handleInput={ this.handleInput }
+            />
+          </div>
 
-        <div>
           <div className="carrinho-link-container">
             <Link
               to="/shoppingCart"
@@ -90,17 +97,19 @@ class Home extends Component {
               {cartSize}
             </Link>
           </div>
-
-          <Search
-            handleApiQuery={ this.handleApiQuery }
-            handleInput={ this.handleInput }
-          />
-          {emptyList
-            ? <p>Nenhum produto foi encontrado</p>
-            : <ProductCard productsList={ productsList } addToCart={ this.addToCart } />}
+        </header>
+        <div className="homepage-container">
+          <div>
+            {emptyList
+              ? <p>Nenhum produto foi encontrado</p>
+              : (
+                <ProductCard
+                  productsList={ productsList }
+                  addToCart={ this.addToCart }
+                />)}
+          </div>
         </div>
       </div>
-
     );
   }
 }
