@@ -13,10 +13,13 @@ class ProductDetails extends Component {
     rating: '',
     error: false,
     evaluation: [],
+    cartSize: 0,
   };
 
   componentDidMount() {
     this.handleCategory();
+    const storageCart = getSavedCart();
+    this.setState({ cartSize: storageCart.length });
   }
 
   handleCategory = async () => {
@@ -77,7 +80,7 @@ class ProductDetails extends Component {
   };
 
   render() {
-    const { product } = this.state;
+    const { product, cartSize } = this.state;
     const { title, thumbnail, price } = product;
     const { email, text, error, evaluation } = this.state;
     const invalidField = <h3 data-testid="error-msg">Campos inválidos</h3>;
@@ -102,6 +105,12 @@ class ProductDetails extends Component {
           </button>
           <Link to="/shoppingCart" data-testid="shopping-cart-button">
             Carrinho
+          </Link>
+          <Link
+            to="/shoppingCart"
+            data-testid="shopping-cart-size"
+          >
+            {cartSize}
           </Link>
         </div>
         <div>

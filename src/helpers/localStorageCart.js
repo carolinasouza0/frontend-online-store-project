@@ -22,3 +22,8 @@ export const savedComents = ({ email, text, rating, productId }) => {
   localStorage
     .setItem(productId, JSON.stringify(newItems));
 };
+
+export const getCartSize = () => {
+  const cartSize = localStorage.getItem('cartSize');
+  return cartSize ? JSON.parse(cartSize) : [];
+};

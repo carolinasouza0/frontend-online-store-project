@@ -1,21 +1,25 @@
 import { Component } from 'react';
+// import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from './Categories';
 import Search from './Search';
 import ProductCard from './ProductCard';
-import { saveCart } from '../helpers/localStorageCart';
+import { getCartSize, getSavedCart, saveCart } from '../helpers/localStorageCart';
 
 class Home extends Component {
   state = {
     categories: [],
     productsList: [],
     searchProduct: '',
+    cartSize: 0,
   };
 
   async componentDidMount() {
     const categorysApi = await getCategories();
     this.setState({ categories: categorysApi });
+    const getCart = getCartSize();
+    this.setState({ cartSize: getCart });
   }
 
   handleInput = ({ target }) => {
@@ -52,10 +56,13 @@ class Home extends Component {
       return prod;
     });
     saveCart(cart, id);
+    const storageCart = getSavedCart();
+    localStorage.setItem('cartSize', JSON.stringify(storageCart.length));
+    this.setState({ cartSize: storageCart.length });
   };
 
   render() {
-    const { categories, productsList, emptyList } = this.state;
+    const { categories, productsList, emptyList, cartSize } = this.state;
     return (
       <div>
         <Categories
@@ -69,12 +76,21 @@ class Home extends Component {
         </div>
 
         <div>
-          <Link
-            to="/shoppingCart"
-            data-testid="shopping-cart-button"
-          >
-            carrinho
-          </Link>
+          <div className="carrinho-link-container">
+            <Link
+              to="/shoppingCart"
+              data-testid="shopping-cart-Link"
+            >
+              Carrinho
+            </Link>
+            <Link
+              to="/shoppingCart"
+              data-testid="shopping-cart-size"
+            >
+              {cartSize}
+            </Link>
+          </div>
+
           <Search
             handleApiQuery={ this.handleApiQuery }
             handleInput={ this.handleInput }
@@ -88,5 +104,11 @@ class Home extends Component {
     );
   }
 }
+
+// Home.propTypes = {
+//   history: PropTypes.shape({
+//     push: PropTypes.func.isRequired,
+//   }).isRequired,
+// };
 
 export default Home;
