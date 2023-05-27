@@ -81,7 +81,7 @@ class Home extends Component {
               to="/shoppingCart"
               data-testid="shopping-cart-button"
             >
-              Carrinho
+              carrinho
             </Link>
             <Link
               to="/shoppingCart"
