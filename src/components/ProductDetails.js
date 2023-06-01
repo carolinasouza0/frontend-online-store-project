@@ -123,6 +123,7 @@ class ProductDetails extends Component {
                 value={ email }
                 onChange={ this.handleChange }
                 name="email"
+                
               />
             </label>
             <label>
