@@ -6,6 +6,7 @@ import Categories from './Categories';
 import Search from './Search';
 import ProductCard from './ProductCard';
 import { getCartSize, getSavedCart, saveCart } from '../helpers/localStorageCart';
+import '../styles/Home.css';
 
 class Home extends Component {
   state = {
@@ -65,42 +66,59 @@ class Home extends Component {
     const { categories, productsList, emptyList, cartSize } = this.state;
     return (
       <div>
-        <Categories
-          categories={ categories }
-          handleApiId={ this.handleApiId }
-        />
-        <div>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-        </div>
+        <aside>
+          <Categories
+            categories={ categories }
+            handleApiId={ this.handleApiId }
+          />
+        </aside>
+        <header>
 
-        <div>
-          <div className="carrinho-link-container">
-            <Link
-              to="/shoppingCart"
-              data-testid="shopping-cart-button"
+          <div
+            className="type-search flex justify-between
+            bg-blue-800 p-2 w-full items-center "
+          >
+            <Search
+              handleApiQuery={ this.handleApiQuery }
+              handleInput={ this.handleInput }
+            />
+            <h1
+              className="logo text-2xl font-bold text-center mt-2 text-white"
             >
-              carrinho
-            </Link>
+              FrontEnd Online Store
+
+            </h1>
+
             <Link
               to="/shoppingCart"
               data-testid="shopping-cart-size"
+              className="text-2xl font-bold text-center
+              text-white mt-2 mr-2 border-solid rounded-full
+              p-1 w-10 h-10 bg-teal-500 hover:bg-teal-400"
             >
               {cartSize}
             </Link>
-          </div>
 
-          <Search
-            handleApiQuery={ this.handleApiQuery }
-            handleInput={ this.handleInput }
-          />
-          {emptyList
-            ? <p>Nenhum produto foi encontrado</p>
-            : <ProductCard productsList={ productsList } addToCart={ this.addToCart } />}
+          </div>
+        </header>
+        <div className="homepage-container bg-gray-200 text-gray-950">
+          <div>
+            {emptyList
+              ? (
+                <p
+                  className="text-center text-2xl font-bold text-gray-950 mt-10"
+                >
+                  Nenhum produto foi encontrado
+
+                </p>)
+              : (
+                <ProductCard
+                  productsList={ productsList }
+                  addToCart={ this.addToCart }
+                />)}
+          </div>
         </div>
       </div>
-
     );
   }
 }

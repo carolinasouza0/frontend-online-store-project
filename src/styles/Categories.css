@@ -1,0 +1,13 @@
+.categories-container {
+  border: 2px solid red;
+  height: 100%;
+  position: absolute;
+  top: 6.2rem;
+  width: 20rem;
+}
+
+.categories-map {
+  border: 2px solid green;
+  margin-top: 1rem;
+  width: 18rem;
+}
