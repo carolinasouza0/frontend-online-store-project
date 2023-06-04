@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import { getSavedCart, getSavedComments, savedComents }
   from '../helpers/localStorageCart';
+import Header from './Header';
 
 class ProductDetails extends Component {
   state = {
@@ -87,6 +88,7 @@ class ProductDetails extends Component {
     return (
       <div>
         <div>
+          <Header />
           <section>
             <p data-testid="product-detail-name">{title}</p>
             <img
@@ -123,7 +125,6 @@ class ProductDetails extends Component {
                 value={ email }
                 onChange={ this.handleChange }
                 name="email"
-                
               />
             </label>
             <label>

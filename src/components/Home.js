@@ -1,11 +1,12 @@
 import { Component } from 'react';
 // import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from './Categories';
-import Search from './Search';
+// import Search from './Search';
 import ProductCard from './ProductCard';
 import { getCartSize, getSavedCart, saveCart } from '../helpers/localStorageCart';
+import Header from './Header';
 import '../styles/Home.css';
 
 class Home extends Component {
@@ -72,7 +73,12 @@ class Home extends Component {
             handleApiId={ this.handleApiId }
           />
         </aside>
-        <header>
+        <Header
+          cartSize={ cartSize }
+          onApiQuery={ this.handleApiQuery }
+          handleSearch={ this.handleInput }
+        />
+        {/* <header>
 
           <div
             className="type-search flex justify-between
@@ -100,7 +106,7 @@ class Home extends Component {
             </Link>
 
           </div>
-        </header>
+        </header> */}
         <div className="homepage-container bg-gray-200 text-gray-950">
           <div>
             {emptyList
