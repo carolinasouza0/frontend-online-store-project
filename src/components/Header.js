@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Home, ShoppingCart } from 'heroicons-react';
 import Search from './Search';
 
 class Header extends Component {
@@ -13,27 +14,33 @@ class Header extends Component {
           className="type-search flex justify-between
          bg-blue-800 p-2 w-full items-center"
         >
-          <Search handleInput={ handleInput } handleSearch={ handleSearch } />
-          <h1 className="logo text-2xl font-bold text-center mt-2 text-white">
+          <div className="flex items-center">
+            <Link to="/" className="mr-2">
+              <Home className="h-6 w-6" />
+            </Link>
+            <div className="search-container">
+              <Search handleInput={ handleInput } handleSearch={ handleSearch } />
+            </div>
+          </div>
+          <h1 className="logo text-2xl font-bold text-center mt-2 text-white flex-grow">
             FrontEnd Online Store
           </h1>
-          <Link
-            to="/"
-            className="text-2xl font-bold text-center
-            text-white mt-2 mr-2 border-solid rounded-full
-            p-1 w-10 h-10 bg-teal-500 hover:bg-teal-400"
-          >
-            Home
-          </Link>
-          <Link
-            to="/shoppingCart"
-            data-testid="shopping-cart-size"
-            className="text-2xl font-bold text-center text-white
-            mt-2 mr-2 border-solid rounded-full
-             p-1 w-10 h-10 bg-teal-500 hover:bg-teal-400"
-          >
-            {cartSize}
-          </Link>
+          <div className="relative">
+            <Link
+              to="/shoppingCart"
+              data-testid="shopping-cart-size"
+              className="flex items-center ml-2"
+            >
+              <ShoppingCart className="h-6 w-6" />
+
+              <span
+                className="bg-red-500 text-white rounded-full
+                px-1 py-0.1 text-xs -ml-1 -mt-5"
+              >
+                {cartSize}
+              </span>
+            </Link>
+          </div>
         </div>
       </header>
     );
