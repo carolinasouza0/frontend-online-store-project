@@ -14,13 +14,10 @@ class ProductDetails extends Component {
     rating: '',
     error: false,
     evaluation: [],
-    cartSize: 0,
   };
 
   componentDidMount() {
     this.handleCategory();
-    const storageCart = getSavedCart();
-    this.setState({ cartSize: storageCart.length });
   }
 
   handleCategory = async () => {
@@ -81,7 +78,7 @@ class ProductDetails extends Component {
   };
 
   render() {
-    const { product, cartSize } = this.state;
+    const { product } = this.state;
     const { title, thumbnail, price } = product;
     const { email, text, error, evaluation } = this.state;
     const invalidField = <h3 data-testid="error-msg">Campos inválidos</h3>;
@@ -89,55 +86,90 @@ class ProductDetails extends Component {
       <div>
         <div>
           <Header />
-          <section>
-            <p data-testid="product-detail-name">{title}</p>
+          <section
+            className="product-detail container flex flex-col justify-center
+            items-center w-1/2 mx-auto my-10 p-5 border-2 border-gray-300"
+          >
+            <p
+              data-testid="product-detail-name"
+              className=" flex flex-col w-96 p-2 m-2 justify-center
+              items-center text-center text-xl font-bold"
+            >
+              {title}
+
+            </p>
             <img
               data-testid="product-detail-image"
               src={ thumbnail }
               alt={ title }
+              className="w-40 p-4 mx-auto my-2 rounded-md shadow-md border-2"
             />
-            <h3 data-testid="product-detail-price">{`R$ ${price}`}</h3>
+            <h3
+              data-testid="product-detail-price"
+              className="text-base font-bold text-center w-40
+              overflow-hidden overflow-ellipsis text-lg"
+            >
+              {`R$ ${price}`}
+
+            </h3>
+            <button
+              type="button"
+              onClick={ this.handleSaveProduct }
+              data-testid="product-detail-add-to-cart"
+              className="bg-blue-500 hover:bg-blue-700 text-white
+            font-bold py-2 px-4 rounded mt-4"
+            >
+              Adicionar ao Carrinho
+            </button>
+            <Link
+              to="/shoppingCart"
+              data-testid="shopping-cart-button"
+              className="bg-blue-500 hover:bg-blue-700 text-white p-2 m-4"
+            >
+              Carrinho
+            </Link>
           </section>
-          <button
-            type="button"
-            onClick={ this.handleSaveProduct }
-            data-testid="product-detail-add-to-cart"
-          >
-            Adicionar ao Carrinho
-          </button>
-          <Link to="/shoppingCart" data-testid="shopping-cart-button">
-            Carrinho
-          </Link>
-          <Link
-            to="/shoppingCart"
-            data-testid="shopping-cart-size"
-          >
-            {cartSize}
-          </Link>
         </div>
-        <div>
+        <div
+          className="flex flex-col justify-center items-center w-1/2
+          mx-auto my-10 p-5 border-2 border-gray-300"
+        >
           <form>
             <label>
-              Email:
+
               <input
                 data-testid="product-detail-email"
                 type="email"
                 value={ email }
                 onChange={ this.handleChange }
                 name="email"
+                placeholder="Digite seu email"
+                className="border-2 border-gray-300 rounded-md shadow-md mb-4 p-1 w-80"
               />
             </label>
-            <label>
+            <p
+              className="text-center text-xl font-bold"
+            >
+              Avaliação do produto:
+
+            </p>
+
+            <label
+              className=" text-base font-bold text-center"
+            >
               <input
                 type="radio"
                 data-testid="1-rating"
                 value="1"
                 onChange={ this.handleChange }
                 name="rating"
+                className="w-8"
               />
               1
             </label>
-            <label>
+            <label
+              className=" text-base font-bold text-center"
+            >
 
               <input
                 type="radio"
@@ -145,10 +177,13 @@ class ProductDetails extends Component {
                 value="2"
                 onChange={ this.handleChange }
                 name="rating"
+                className="w-8 ml-6"
               />
               2
             </label>
-            <label>
+            <label
+              className=" text-base font-bold text-center"
+            >
 
               <input
                 type="radio"
@@ -156,10 +191,13 @@ class ProductDetails extends Component {
                 value="3"
                 onChange={ this.handleChange }
                 name="rating"
+                className="w-8 ml-6"
               />
               3
             </label>
-            <label>
+            <label
+              className=" text-base font-bold text-center"
+            >
 
               <input
                 type="radio"
@@ -167,10 +205,13 @@ class ProductDetails extends Component {
                 value="4"
                 onChange={ this.handleChange }
                 name="rating"
+                className="w-8 ml-6"
               />
               4
             </label>
-            <label>
+            <label
+              className=" text-base font-bold text-center"
+            >
 
               <input
                 type="radio"
@@ -178,6 +219,7 @@ class ProductDetails extends Component {
                 value="5"
                 onChange={ this.handleChange }
                 name="rating"
+                className="w-8 ml-6"
               />
               5
             </label>
@@ -187,9 +229,11 @@ class ProductDetails extends Component {
                 data-testid="product-detail-evaluation"
                 value={ text }
                 rows="5"
-                cols="20"
+                cols="30"
                 onChange={ this.handleChange }
                 name="text"
+                placeholder="Deixe seu comentário"
+                className="border-2 border-gray-300 rounded-md shadow-md p-1 mt-8"
 
               />
             </div>
@@ -198,9 +242,10 @@ class ProductDetails extends Component {
                 type="button"
                 data-testid="submit-review-btn"
                 onClick={ this.handleSubmit }
+                className="bg-blue-500 hover:bg-blue-700 text-white
+                font-bold py-2 px-4 rounded mt-4"
               >
                 Enviar
-
               </button>
               {error && invalidField }
             </div>

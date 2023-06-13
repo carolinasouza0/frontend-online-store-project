@@ -15,7 +15,7 @@ class ProductCard extends Component {
               data-testid="product"
               className="product-card flex flex-col justify-between bg-white
               rounded-md shadow-md hover:shadow-lg
-              transition duration-500 ease-in-out transform"
+              transition duration-500 ease-in-out transform m-4 p-4"
             >
               <p
                 className="text-center text-xl text-zinc-900 font-bold my-2"

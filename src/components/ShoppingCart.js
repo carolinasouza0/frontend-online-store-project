@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getSavedCart } from '../helpers/localStorageCart';
-import '../styles/ShoppingCart.css';
 import Header from './Header';
 
 class ShoppingCart extends Component {

@@ -9,7 +9,7 @@ class Categories extends Component {
       <aside>
         <div
           className="categories-container flex flex-col
-          items-start container px-4 mx-auto my-2 rounded-md"
+          items-start container px-4 mx-auto my-2 rounded-md "
         >
           <h3 className="text-2xl font-bold">
             Categorias:

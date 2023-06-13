@@ -45,10 +45,10 @@ class Checkout extends Component {
     const invalidField = <h3 data-testid="error-msg">Campos inválidos</h3>;
     return (
       <div
-        className="flex justify-center items-center w-screen"
+        className="flex justify-center items-center w-screen mt-16 mb-16"
       >
         <div
-          className="flex flex-col w-auto"
+          className="flex flex-col w-auto mr-20"
         >
           {' '}
           { products.map(({ title, thumbnail, price }) => (
@@ -143,7 +143,9 @@ class Checkout extends Component {
               className="w-96 p-2 m-2 border-2 border-gray-300 rounded-md
               shadow-md text-base font-bold"
             />
-            <label>
+            <label
+              className=" text-base font-bold text-center ml-40"
+            >
               Boleto
               <input
                 type="radio"
@@ -151,9 +153,12 @@ class Checkout extends Component {
                 data-testid="ticket-payment"
                 name="payment"
                 onChange={ this.handleChange }
+                className="w-8"
               />
             </label>
-            <label>
+            <label
+              className=" text-base font-bold text-center"
+            >
               Visa
               <input
                 type="radio"
@@ -161,9 +166,12 @@ class Checkout extends Component {
                 data-testid="visa-payment"
                 name="payment"
                 onChange={ this.handleChange }
+                className="w-8 mr-8"
               />
             </label>
-            <label>
+            <label
+              className=" text-base font-bold text-center"
+            >
               MasterCard
               <input
                 type="radio"
@@ -171,9 +179,12 @@ class Checkout extends Component {
                 data-testid="master-payment"
                 name="payment"
                 onChange={ this.handleChange }
+                className="w-8 mr-8"
               />
             </label>
-            <label>
+            <label
+              className=" text-base font-bold text-center"
+            >
               Elo
               <input
                 type="radio"
@@ -181,6 +192,7 @@ class Checkout extends Component {
                 data-testid="elo-payment"
                 name="payment"
                 onChange={ this.handleChange }
+                className="w-8"
               />
             </label>
           </form>
@@ -188,6 +200,10 @@ class Checkout extends Component {
             type="button"
             data-testid="checkout-btn"
             onClick={ this.handleSubmit }
+            className="bg-blue-500 hover:bg-blue-700 text-white
+            font-bold py-2 px-4 rounded my-2 mx-auto w-3/4
+            transition duration-500 ease-in-out
+            transform hover:-translate-y-1 hover:scale-110 shadow-md"
           >
             Enviar
 
