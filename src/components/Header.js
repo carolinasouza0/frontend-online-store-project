@@ -6,7 +6,7 @@ import Search from './Search';
 
 class Header extends Component {
   render() {
-    const { cartSize, handleInput, handleSearch } = this.props;
+    const { cartSize, handleInput, handleApiQuery } = this.props;
 
     return (
       <header>
@@ -19,7 +19,7 @@ class Header extends Component {
               <Home className="h-6 w-6" />
             </Link>
             <div className="search-container">
-              <Search handleInput={ handleInput } handleSearch={ handleSearch } />
+              <Search handleInput={ handleInput } handleApiQuery={ handleApiQuery } />
             </div>
           </div>
           <div
@@ -71,7 +71,7 @@ class Header extends Component {
 Header.propTypes = {
   cartSize: PropTypes.number.isRequired,
   handleInput: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func.isRequired,
+  handleApiQuery: PropTypes.func.isRequired,
 };
 
 export default Header;

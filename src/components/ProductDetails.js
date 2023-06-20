@@ -249,7 +249,6 @@ class ProductDetails extends Component {
               </button>
               {error && invalidField }
             </div>
-
           </form>
           <div>
             { evaluation.map((item, index) => (
