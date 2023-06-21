@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -32,7 +33,6 @@ class ProductDetails extends Component {
       product: productDetails,
     });
     const evaluation = getSavedComments(id);
-    console.log(id);
     this.setState({ evaluation });
   };
 

@@ -20,6 +20,7 @@ class ShoppingCart extends Component {
 
   renderEmptyCart = () => (
     <section>
+      <Header />
       <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
     </section>
   );
@@ -74,7 +75,6 @@ class ShoppingCart extends Component {
     if (productsCart.length === 0) return empty;
     return (
       <div>
-
         <Header />
         <div
           className="flex w-full my-10 p-5 border-2"

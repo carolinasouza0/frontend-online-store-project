@@ -67,8 +67,8 @@ class ProductCard extends Component {
 }
 
 ProductCard.propTypes = {
-  productsList: PropTypes.arrayOf.isRequired,
-  addToCart: PropTypes.shape({}).isRequired,
+  productsList: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

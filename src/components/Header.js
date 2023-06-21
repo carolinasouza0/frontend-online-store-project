@@ -1,12 +1,30 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Home, ShoppingCart } from 'heroicons-react';
 import Search from './Search';
+import { getCartSize, getSavedCart } from '../helpers/localStorageCart';
 
 class Header extends Component {
+  state = {
+    cartSize: 0,
+  };
+
+  async componentDidMount() {
+    const getCart = getCartSize();
+    this.setState({ cartSize: getCart });
+    this.updateCartSize();
+  }
+
+  updateCartSize = () => {
+    const storageCart = getSavedCart();
+    this.setState({ cartSize: storageCart.length });
+  };
+
   render() {
-    const { cartSize, handleInput, handleApiQuery } = this.props;
+    const { handleInput, handleApiQuery } = this.props;
+    const { cartSize } = this.state;
 
     return (
       <header>
@@ -16,7 +34,7 @@ class Header extends Component {
         >
           <div className="flex items-center">
             <Link to="/" className="mr-2">
-              <Home className="h-6 w-6" />
+              <Home className="h-8 w-8" />
             </Link>
             <div className="search-container">
               <Search handleInput={ handleInput } handleApiQuery={ handleApiQuery } />
@@ -52,7 +70,7 @@ class Header extends Component {
               data-testid="shopping-cart-size"
               className="flex items-center ml-2"
             >
-              <ShoppingCart className="h-6 w-6" />
+              <ShoppingCart className="h-8 w-8" />
 
               <span
                 className="bg-red-500 text-white rounded-full
@@ -69,7 +87,6 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  cartSize: PropTypes.number.isRequired,
   handleInput: PropTypes.func.isRequired,
   handleApiQuery: PropTypes.func.isRequired,
 };

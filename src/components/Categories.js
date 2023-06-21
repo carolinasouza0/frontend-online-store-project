@@ -42,7 +42,7 @@ class Categories extends Component {
   }
 }
 Categories.propTypes = {
-  categories: PropTypes.arrayOf().isRequired,
+  categories: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   handleApiId: PropTypes.func.isRequired,
 };
 
