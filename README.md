@@ -11,7 +11,7 @@ Este projeto √© uma Loja Online simplificada desenvolvida em grupo, sem utiliza√
 
 ## Tecnologias utilizadas
 - React (componente de classe)
-- CSS
+- Tailwind (CSS)
 - Local Storage
 
 ## :rocket: Rodando o projeto
